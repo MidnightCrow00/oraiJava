@@ -5,8 +5,7 @@ import hu.szamalk.modell.Konyv;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class Main {
     private List<Konyv> konyvek;
@@ -27,12 +26,24 @@ public class Main {
             Konyv konyv = new Konyv(s);
             konyvek.add(konyv);
         });
+        System.out.println(konyvek);
     }
 
     private void feladatok() {
-        atlagAr();
         System.out.println("Könyvek átlaga: "+atlagAr());
+        System.out.println("Melyik években adtak ki könyvet: "+kiadKonyv());
+        System.out.println("Melyik a legrégebbi kiadási év: ");
+        System.out.println(Collections.min(kiadKonyv()));
     }
+
+    private Set<Integer> kiadKonyv() {
+        Set<Integer> kiadottEvek = new HashSet<>();
+        for (Konyv konyv : konyvek) {
+            kiadottEvek.add(konyv.getKiadasEve());
+        }
+        return kiadottEvek;
+    }
+    
 
     private double atlagAr() {
        int osszeg= 0;

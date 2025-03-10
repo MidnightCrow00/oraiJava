@@ -16,12 +16,17 @@ public class Konyv implements Serializable {
     public Konyv(String sor){
         String[] adatok = sor.split(";");
         String cim = adatok[0];
-        String szerzo = adatok[1];
-        int kiadasEve = Integer.parseInt(adatok[2]);
-        int ar = Integer.parseInt(adatok[2]);
         this.cim = cim;
+
+        String szerzokSor = adatok[1];
+        String[] szerzok = szerzokSor.split(",");
         this.szerzok = new ArrayList<>();
-        szerzok.add(szerzo);
+        for (String szerzo:szerzok){
+            this.szerzok.add(szerzo);
+        }
+
+        int kiadasEve = Integer.parseInt(adatok[2]);
+        int ar = Integer.parseInt(adatok[3]);
         this.kiadasEve = kiadasEve;
         this.ar = ar;
         ujIdGeneralas();
@@ -43,6 +48,10 @@ public class Konyv implements Serializable {
 
     public int getAr() {
         return ar;
+    }
+
+    public int getKiadasEve() {
+        return kiadasEve;
     }
 
     /* paraméterként nem jó az UUID */
