@@ -54,6 +54,10 @@ public class Konyv implements Serializable {
         return kiadasEve;
     }
 
+    public List<String> getSzerzok() {
+        return szerzok;
+    }
+
     /* paraméterként nem jó az UUID */
     public void ujIdGeneralas(){
         id = UUID.randomUUID();

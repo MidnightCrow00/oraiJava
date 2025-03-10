@@ -23,8 +23,10 @@ public class Main {
         String fn = "konyvek.txt";
         List<String> sorok = Files.readAllLines(Path.of(fn));
         sorok.forEach(s -> {
+            if (!(s.contains("CÍM")||s.contains("===="))){
             Konyv konyv = new Konyv(s);
             konyvek.add(konyv);
+            }
         });
         System.out.println(konyvek);
     }
@@ -35,7 +37,36 @@ public class Main {
         System.out.println("Melyik a legrégebbi kiadási év: ");
         System.out.println(Collections.min(kiadKonyv()));
         System.out.println("Melyik években hány könyvet adtak ki: "+kiadKonyvEvbenHany());
+        System.out.println("Kik írtak könyvet: "+kikIrtak());
+        System.out.println("Melyik szerző hány könyvet írt: "+szerzoHany());
     }
+
+    private Map<String, Integer> szerzoHany() {
+        Map<String, Integer> szerzoHany = new HashMap<>();
+        konyvek.forEach(konyv -> {
+            List<String> authors = konyv.getSzerzok();
+            for (String author : authors) {
+                author = author.trim();
+                szerzoHany.put(author, szerzoHany.getOrDefault(author, 0) + 1);
+            }
+        });
+        return szerzoHany;
+    }
+
+
+
+    private Set<String> kikIrtak() {
+        Set<String> szerzok = new HashSet<>();
+        konyvek.forEach(konyv -> {
+            List<String> authors = konyv.getSzerzok();
+            for (String author : authors) {
+                szerzok.add(author.trim());
+            }
+        });
+        return szerzok;
+    }
+
+
 
     private void mapKiiras(Map <Integer,Integer> map) {
         /* generálva iter által*/
