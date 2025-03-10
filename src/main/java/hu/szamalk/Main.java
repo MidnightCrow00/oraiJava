@@ -37,6 +37,15 @@ public class Main {
         System.out.println("Melyik években hány könyvet adtak ki: "+kiadKonyvEvbenHany());
     }
 
+    private void mapKiiras(Map <Integer,Integer> map) {
+        /* generálva iter által*/
+        for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
+            int k = entry.getKey();
+            int v=entry.getValue();
+            System.out.printf("[%d]=%d db\n", k,v);
+        }
+    }
+
     private Map<Integer, Integer> kiadKonyvEvbenHany() {
         Map<Integer, Integer> kiadHany = new HashMap<>();
         konyvek.forEach(konyv -> kiadHany.put(konyv.getKiadasEve(), kiadHany.getOrDefault(konyv.getKiadasEve(),0)+1));
