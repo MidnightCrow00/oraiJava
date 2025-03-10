@@ -34,6 +34,13 @@ public class Main {
         System.out.println("Melyik években adtak ki könyvet: "+kiadKonyv());
         System.out.println("Melyik a legrégebbi kiadási év: ");
         System.out.println(Collections.min(kiadKonyv()));
+        System.out.println("Melyik években hány könyvet adtak ki: "+kiadKonyvEvbenHany());
+    }
+
+    private Map<Integer, Integer> kiadKonyvEvbenHany() {
+        Map<Integer, Integer> kiadHany = new HashMap<>();
+        konyvek.forEach(konyv -> kiadHany.put(konyv.getKiadasEve(), kiadHany.getOrDefault(konyv.getKiadasEve(),0)+1));
+        return  kiadHany;
     }
 
     private Set<Integer> kiadKonyv() {
@@ -43,7 +50,7 @@ public class Main {
         }
         return kiadottEvek;
     }
-    
+
 
     private double atlagAr() {
        int osszeg= 0;
